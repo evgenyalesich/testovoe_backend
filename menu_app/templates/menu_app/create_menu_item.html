@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Menu Item</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .menu {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .menu a:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'create_menu_item' %}">Create Menu Item</a>
+    </div>
+    <h1>Create New Menu Item</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

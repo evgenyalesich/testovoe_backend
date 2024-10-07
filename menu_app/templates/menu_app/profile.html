@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .menu {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .menu a:hover {
+            background-color: #575757;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'create_menu_item' %}">Create Menu Item</a>
+        <a href="{% url 'edit_menu_item' 1 %}">Edit Menu Item</a>
+    </div>
+    <h1>Your Menu Items</h1>
+    <ul>
+        {% for item in menu_items %}
+            <li>{{ item.title }} - <a href="{% url 'edit_menu_item' item.pk %}">Edit</a></li>
+        {% empty %}
+            <li>No menu items found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

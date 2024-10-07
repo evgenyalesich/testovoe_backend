@@ -1,0 +1,43 @@
+<!-- menu.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .active {
+            background-color: #575757; /* цвет фона для активного пункта */
+            color: white; /* цвет текста для активного пункта */
+        }
+    </style>
+</head>
+<body>
+    <h1>Menu</h1>
+    {% draw_menu 'main_menu' %}  <!-- Используем тег для отрисовки меню -->
+
+    <h2>Check URL</h2>
+    <input type="text" id="url" placeholder="Enter URL to check">
+    <button onclick="checkUrl()">Check</button>
+    <div id="url-check-result"></div>
+
+    <script>
+        function checkUrl() {
+            const url = document.getElementById('url').value;
+            fetch(`/check-url/?url=${url}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultDiv = document.getElementById('url-check-result');
+                    if (data.exists) {
+                        resultDiv.innerHTML = `<p>URL exists! View name: ${data.name}</p>`;
+                    } else {
+                        resultDiv.innerHTML = '<p>URL does not exist.</p>';
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
